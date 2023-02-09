@@ -1,6 +1,6 @@
 # Ironmatch
 
-<!-- <img src="" alt="logo" width="50%"/>   -->
+<img src="./public/images/ironmatch logo.png" alt="logo" width="50%"/>  
 
 ## Description
 
