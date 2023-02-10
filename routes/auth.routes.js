@@ -6,7 +6,7 @@ const { isLoggedOut, isLoggedIn } = require("../middleware/route-guard");
 
 /* GET signup page */
 router.get("/signup", isLoggedOut, (req, res, next) => {
-  res.render("auth/signup");
+  res.render("auth-views/signup");
 });
 
 router.post("/signup", isLoggedOut, async (req, res, next) => {
@@ -19,12 +19,12 @@ router.post("/signup", isLoggedOut, async (req, res, next) => {
   body.passwordHash = passwordHash;
 
   await Teacher.create(body);
-  res.redirect("/auth/login");
+  res.redirect("/auth-views/login");
 });
 
 /* GET login page */
 router.get("/login", isLoggedOut, (req, res, next) => {
-  res.render("auth/login");
+  res.render("auth-views/login");
 });
 
 router.post("/login", isLoggedOut, async (req, res) => {
@@ -45,7 +45,7 @@ router.post("/login", isLoggedOut, async (req, res) => {
       };
       req.session.user = tempUser;
 
-      res.redirect("/profile");
+      res.redirect("teacher-views/profile");
     } else {
       // Incorrect password
       console.log("incorrect password");
