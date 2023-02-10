@@ -19,7 +19,7 @@ router.post("/signup", isLoggedOut, async (req, res, next) => {
   body.passwordHash = passwordHash;
 
   await Teacher.create(body);
-  res.redirect("/auth-views/login");
+  res.redirect("/user/profile");
 });
 
 /* GET login page */
@@ -45,7 +45,7 @@ router.post("/login", isLoggedOut, async (req, res) => {
       };
       req.session.user = tempUser;
 
-      res.redirect("teacher-views/profile");
+      res.redirect("/user/profile");
     } else {
       // Incorrect password
       console.log("incorrect password");

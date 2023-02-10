@@ -5,9 +5,19 @@
   </section>
   <section class="myClass">
     <h1>My class:</h1>
-    <div>
+    <div class="allStudents">
       <% allStudents.forEach(student => { %>
-      <div><%= student.firstName %></div>
+      <div class="card" style="width: 18rem">
+        <img
+          src="<%- student.img %>"
+          class="card-img-top"
+          alt="student-image"
+        />
+        <div class="card-body">
+          <h5 class="card-title"><%= student.firstName %></h5>
+          <a href="#" class="btn btn-primary">Edit</a>
+        </div>
+      </div>
       <% }) %>
     </div>
   </section>
