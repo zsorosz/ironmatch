@@ -1,10 +1,30 @@
 <main>
   <section class="manageClass">
-    <a href="/">Add a Student</a>
-    <a href="/">Send Survey</a>
+    <button
+      type="button"
+      class="btn btn-info"
+      onclick="window.location.href='/'"
+    >
+      Add a Student
+    </button>
+    <button type="button" class="btn btn-info">Send Survey</button>
+    <button
+      type="button"
+      class="btn btn-info"
+      onclick="window.location.href='/'"
+    >
+      Create random matches for lab work
+    </button>
+    <button
+      type="button"
+      class="btn btn-info"
+      onclick="window.location.href='/'"
+    >
+      Create project teams
+    </button>
   </section>
   <section class="myClass">
-    <h1>My class:</h1>
+    <h1 class="mb-4">My class:</h1>
     <div class="allStudents">
       <% allStudents.forEach(student => { %>
       <div class="card" style="width: 18rem">
@@ -15,14 +35,10 @@
         />
         <div class="card-body">
           <h5 class="card-title"><%= student.firstName %></h5>
-          <a href="#" class="btn btn-primary">Edit</a>
+          <a href="#" class="btn btn-info">Edit</a>
         </div>
       </div>
       <% }) %>
     </div>
-  </section>
-  <section class="manageTeams">
-    <a href="/">Create random matches for lab work</a>
-    <a href="/">Create project teams</a>
   </section>
 </main>

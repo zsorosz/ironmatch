@@ -19,3 +19,29 @@ h1 {
 #loginForm button {
   margin: 0 auto;
 }
+
+.allStudents {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.card-img-top {
+  height: 20rem;
+  object-fit: cover;
+}
+
+.btn-info {
+  color: white;
+  transition: .2s all ease-in-out;
+}
+.btn-info:hover {
+  color: white;
+  background-color: #0b7691;
+}
+
+.manageClass {
+  display: flex;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
