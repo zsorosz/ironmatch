@@ -1,32 +1,35 @@
 const { Schema, model } = require("mongoose");
 
-// TODO: Please make sure you edit the User model to whatever makes sense in this case
-const userSchema = new Schema(
+const studentSchema = new Schema(
   {
-    username: {
+    firstName: {
       type: String,
       trim: true,
-      required: false,
-      unique: true
+      required: true,
+    },
+    lastName: {
+      type: String,
+      required: true,
+      trim: true,
     },
     email: {
       type: String,
       required: true,
+      trim: true,
       unique: true,
-      lowercase: true,
-      trim: true
     },
-    password: {
-      type: String,
-      required: true
-    }
+    surveyComplete: Boolean,
+    greenList: { 
+      type :[Schema.Types.ObjectId],
+      ref : "Student",
+    },
+    redList: { 
+      type :[Schema.Types.ObjectId],
+      ref : "Student",
+    },
   },
-  {
-    // this second object adds extra properties: `createdAt` and `updatedAt`    
-    timestamps: true
-  }
 );
 
-const User = model("User", userSchema);
+const Student = model("Student", studentSchema);
 
-module.exports = User;
+module.exports = Student;
