@@ -18,38 +18,48 @@ mongoose
 const seedStudents = [
   {
     firstName: "Rachel",
+    img: "/images/rachel.webp",
   },
   {
     firstName: "Joey",
+    img: "/images/joey.jpg",
   },
   {
     firstName: "Ross",
+    img: "/images/ross.webp",
   },
   {
     firstName: "Monica",
+    img: "/images/monica.webp",
   },
   {
     firstName: "Phoebe",
+    img: "/images/pheobe.webp",
   },
   {
     firstName: "Janice",
+    img: "/images/jenice.webp",
   },
   {
     firstName: "Gunther",
+    img: "/images/gunther.jpg",
   },
   {
     firstName: "Ben",
+    img: "/images/ben.jpg",
   },
   {
     firstName: "Mike",
+    img: "/images/mike.jpg",
   },
   {
     firstName: "Emily",
+    img: "/public/images/emily.webp",
   },
 ];
 
 const seedDB = async () => {
-  //   await Student.deleteMany({});
+  await Student.deleteMany({});
   await Student.insertMany(seedStudents);
 };
 
