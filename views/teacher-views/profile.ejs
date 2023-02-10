@@ -1,1 +1,18 @@
-<h1>Teacher profile</h1>
+<main>
+  <section class="manageClass">
+    <a href="/">Add a Student</a>
+    <a href="/">Send Survey</a>
+  </section>
+  <section class="myClass">
+    <h1>My class:</h1>
+    <div>
+      <% allStudents.forEach(student => { %>
+      <div><%= student.firstName %></div>
+      <% }) %>
+    </div>
+  </section>
+  <section class="manageTeams">
+    <a href="/">Create random matches for lab work</a>
+    <a href="/">Create project teams</a>
+  </section>
+</main>
