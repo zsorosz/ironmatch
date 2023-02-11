@@ -1,0 +1,55 @@
+<div class="container mt-5 card-container">
+  <div class="card" style="width: 30rem">
+    <img src="<%= foundStudent.img %>" class="card-img-top" alt="..." />
+    <div class="card-body">
+      <h5 class="card-title fw-bold"><%= foundStudent.firstName %></h5>
+    </div>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">
+        <span class="fw-bold">First name: </span><%= foundStudent.firstName %>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Last name: </span><%= foundStudent.lastName %>
+      </li>
+      <li class="list-group-item">
+        <span class="fw-bold">Email: </span><%= foundStudent.email %>
+      </li>
+      <% if (foundStudent.greenList.length) { %>
+      <li class="list-group-item">
+        <span class="fw-bold">Green List: </span>
+        <ul class="list-inline">
+          <% foundStudent.greenList.forEach(el => { %>
+          <li class="list-inline-item"><%= el.firstName %></li>
+          <% }) %>
+        </ul>
+        <% } %>
+      </li>
+      <% if (foundStudent.redList.length) { %>
+      <li class="list-group-item">
+        <span class="fw-bold">Red List: </span>
+        <ul class="list-inline">
+          <% foundStudent.redList.forEach(el => { %>
+          <li class="list-inline-item"><%= el.firstName %></li>
+          <% }) %>
+        </ul>
+        <% } %>
+      </li>
+    </ul>
+    <div class="card-body card-ctas">
+      <form
+        method="POST"
+        action="/student/<%= foundStudent._id %>/delete"
+        class="delete-form"
+      >
+        <button type="submit" class="btn btn-danger">Delete</button>
+      </form>
+      <button
+        type="button"
+        class="btn btn-info edit-btn"
+        onclick="window.location.href='/student/<%= foundStudent._id %>/edit'"
+      >
+        Edit
+      </button>
+    </div>
+  </div>
+</div>

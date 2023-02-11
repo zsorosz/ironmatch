@@ -18,6 +18,8 @@ mongoose
 const seedStudents = [
   {
     firstName: "Rachel",
+    lastName: "Green",
+    email: "rachel@friends.com",
     img: "/images/rachel.webp",
   },
   {
