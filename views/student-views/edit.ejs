@@ -1,0 +1,59 @@
+<div class="container text-center mt-5">
+  <h2>Edit details</h2>
+  <div class="row form-container">
+    <div class="col-md-6">
+      <form
+        action="/student/<%= student._id %>/edit"
+        method="POST"
+        class="student-form"
+      >
+        <div class="form-group">
+          <label
+            >First name:*
+            <input
+              type="text"
+              name="firstName"
+              class="form-control"
+              value="<%= student.firstName %>"
+              required
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label
+            >Last name:
+            <input
+              type="text"
+              name="lastName"
+              class="form-control"
+              value="<%= student.lastName %>"
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label
+            >Email:
+            <input
+              type="email"
+              name="email"
+              class="form-control"
+              value="<%= student.email %>"
+            />
+          </label>
+        </div>
+        <div class="form-group">
+          <label
+            >Photo:
+            <input
+              type="file"
+              name="img"
+              class="form-control-file"
+              value="<%= student.img %>"
+            />
+          </label>
+        </div>
+        <button type="submit" class="btn btn-info">Update</button>
+      </form>
+    </div>
+  </div>
+</div>
