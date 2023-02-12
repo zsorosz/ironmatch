@@ -6,7 +6,10 @@ const Student = require("../models/Student.model");
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
   const allStudents = await Student.find();
-  res.render("teacher-views/profile", { user: req.session.user, allStudents });
+  res.render("teacher-views/profile", {
+    user: req.session.user,
+    allStudents,
+  });
 });
 
 module.exports = router;
