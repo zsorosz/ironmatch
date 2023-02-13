@@ -78,3 +78,9 @@ h1 {
 .edit-btn {
   width: 50%;
 }
+#group-size {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  width: 20%;
+}

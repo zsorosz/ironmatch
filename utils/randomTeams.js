@@ -20,4 +20,5 @@ const randomGroup = (students, groupSize) => {
     return allGroups
   }
 
+  
 module.exports = randomGroup 
