@@ -1,0 +1,22 @@
+<section class="myClass">
+  <% if (page === 1) { %>
+  <h1 class="mb-4">Hello <%= student.firstName %></h1>
+  <h4>With who would you like to work on your next project?</h4>
+  <% } else { %>
+  <h4>Select maximum 3 students you would NOT like to work with</h4>
+  <% } %> <% if (errorMessage) { %>
+  <h4><%= errorMessage %></h4>
+  <% } %>
+  <form <% if (page === 1) { %>
+    action="/survey/<%= student._id %>"
+  <% } else { %>
+    action="/survey/<%= student._id %>/page2" 
+    <% } %>
+    method="POST">
+    <% allStudents.forEach(stud => { %>
+    <input type="checkbox" name="<%= stud._id %>" /> <%= stud.firstName %>
+    <br />
+    <% }) %>
+    <button type="submit">Continue</button>
+  </form>
+</section>

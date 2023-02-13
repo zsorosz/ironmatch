@@ -61,7 +61,58 @@
     >
       Add a Student
     </button>
-    <button type="button" class="btn btn-info">Send Survey</button>
+    <button
+      type="button"
+      class="btn btn-info"
+      data-bs-toggle="modal"
+      data-bs-target="#surveyLinks"
+    >
+      Survey links
+    </button>
+    <!-- Survey links modal -->
+    <div
+      class="modal fade"
+      id="surveyLinks"
+      tabindex="-1"
+      aria-labelledby="exampleModalLabel"
+      aria-hidden="true"
+    >
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h1 class="modal-title fs-5" id="exampleModalLabel">
+              Survey Links
+            </h1>
+            <button
+              type="button"
+              class="btn-close"
+              data-bs-dismiss="modal"
+              aria-label="Close"
+            ></button>
+          </div>
+          <div class="modal-body">
+            <ul>
+              <% allStudents.forEach(student => { %>
+              <li>
+                <%= student.firstName %>: http://localhost:3000/survey/<%=
+                student._id %>
+              </li>
+              <% }) %>
+            </ul>
+          </div>
+          <div class="modal-footer">
+            <button
+              type="button"
+              class="btn btn-secondary"
+              data-bs-dismiss="modal"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+
     <button
       type="button"
       class="btn btn-info"

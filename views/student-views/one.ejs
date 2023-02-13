@@ -16,7 +16,7 @@
       </li>
       <% if (foundStudent.greenList.length) { %>
       <li class="list-group-item">
-        <span class="fw-bold">Green List: </span>
+        <span class="fw-bold">Would like to work with: </span>
         <ul class="list-inline">
           <% foundStudent.greenList.forEach(el => { %>
           <li class="list-inline-item"><%= el.firstName %></li>
@@ -26,7 +26,7 @@
       </li>
       <% if (foundStudent.redList.length) { %>
       <li class="list-group-item">
-        <span class="fw-bold">Red List: </span>
+        <span class="fw-bold">Would not like to work with: </span>
         <ul class="list-inline">
           <% foundStudent.redList.forEach(el => { %>
           <li class="list-inline-item"><%= el.firstName %></li>
