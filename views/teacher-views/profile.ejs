@@ -92,9 +92,14 @@
             ></button>
           </div>
           <div class="modal-body">
-            <ul>
+              <% const studentNames = [] %>
               <% allStudents.forEach(student => { %>
-              <li><%= student.firstName %></li>
+                <% studentNames.push(student.firstName) %>
+              <% }) %>
+              <% let random = randomTeams(studentNames, 4) %>
+            <ul>
+              <% random.forEach(team => { %>
+               <li><%= team %></li>
               <% }) %>
             </ul>
           </div>
