@@ -84,3 +84,7 @@ h1 {
   gap: 1rem;
   width: 20%;
 }
+.errorMessage {
+  background-color: rgb(235, 101, 101);
+  color: white;
+}
