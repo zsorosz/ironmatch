@@ -25,6 +25,7 @@ router.post("/random-teams", async (req, res) => {
   });
   let groupSize = req.body.typeNumber
   let random = randomTeams(studentNames, groupSize);
+  console.log(random)
   res.render('teacher-views/random-teams', {random} )
 })
 

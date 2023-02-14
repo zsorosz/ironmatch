@@ -20,43 +20,43 @@ const seedStudents = [
     firstName: "Rachel",
     lastName: "Green",
     email: "rachel@friends.com",
-    img: "/images/rachel.webp",
+    imageUrl: "/images/rachel.webp",
   },
   {
     firstName: "Joey",
-    img: "/images/joey.jpg",
+    imageUrl: "/images/joey.jpg",
   },
   {
     firstName: "Ross",
-    img: "/images/ross.webp",
+    imageUrl: "/images/ross.webp",
   },
   {
     firstName: "Monica",
-    img: "/images/monica.webp",
+    imageUrl: "/images/monica.webp",
   },
   {
     firstName: "Phoebe",
-    img: "/images/pheobe.webp",
+    imageUrl: "/images/pheobe.webp",
   },
   {
     firstName: "Janice",
-    img: "/images/jenice.webp",
+    imageUrl: "/images/jenice.webp",
   },
   {
     firstName: "Gunther",
-    img: "/images/gunther.jpg",
+    imageUrl: "/images/gunther.jpg",
   },
   {
     firstName: "Ben",
-    img: "/images/ben.jpg",
+    imageUrl: "/images/ben.jpg",
   },
   {
     firstName: "Mike",
-    img: "/images/mike.jpg",
+    imageUrl: "/images/mike.jpg",
   },
   {
     firstName: "Emily",
-    img: "/public/images/emily.webp",
+    imageUrl: "/images/emily.webp",
   },
 ];
 

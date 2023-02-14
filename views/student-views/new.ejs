@@ -2,7 +2,7 @@
   <h2>Add a new student</h2>
   <div class="row form-container">
     <div class="col-md-6">
-      <form action="/student/new" method="POST" class="student-form">
+      <form action="/student/new" method="POST" class="student-form" enctype="multipart/form-data" >
         <div class="form-group">
           <label
             >First name:*
@@ -24,7 +24,7 @@
         <div class="form-group">
           <label
             >Photo:
-            <input type="file" name="img" class="form-control-file" />
+            <input type="file" name="imageUrl" class="form-control-file" accept="image/png, image/jpg" />
           </label>
         </div>
         <button type="submit" class="btn btn-info">Create</button>

@@ -6,6 +6,7 @@
         action="/student/<%= student._id %>/edit"
         method="POST"
         class="student-form"
+        enctype="multipart/form-data"
       >
         <div class="form-group">
           <label
@@ -46,9 +47,10 @@
             >Photo:
             <input
               type="file"
-              name="img"
+              name="imageUrl"
               class="form-control-file"
-              value="<%= student.img %>"
+              accept="image/png, image/jpg"
+              value="<%= student.imageUrl %>"
             />
           </label>
         </div>
