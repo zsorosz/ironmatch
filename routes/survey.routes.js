@@ -84,8 +84,8 @@ router.get("/:id/page2", async (req, res, next) => {
 /* POST survey page 2 */
 router.post("/:id/page2", async (req, res) => {
   try {
-    if (Object.keys(req.body).length > 3) {
-      const student = await Student.findById(req.params.id);
+    const student = await Student.findById(req.params.id);
+    if (Object.keys(req.body).length !== 3) {
       const allStudents = await Student.find({
         _id: {
           $nin: [
@@ -99,7 +99,7 @@ router.post("/:id/page2", async (req, res) => {
         },
       });
       const page = 2;
-      const errorMessage = "You selected too many options";
+      const errorMessage = "Please select exactly 3 students";
       res.render("survey", {
         student,
         allStudents,
@@ -107,10 +107,26 @@ router.post("/:id/page2", async (req, res) => {
         page,
       });
     }
-    const redList = Object.keys(req.body);
+    const redList = await Object.keys(req.body);
+    const orangeList = await Student.find({
+      _id: {
+        $nin: [
+          req.params.id,
+          student.greenList[0]._id,
+          student.greenList[1]._id,
+          student.greenList[2]._id,
+          student.greenList[3]._id,
+          student.greenList[4]._id,
+          redList[0],
+          redList[1],
+          redList[2],
+        ],
+      },
+    });
     await Student.findByIdAndUpdate(req.params.id, {
       ...req.body,
       redList: redList,
+      orangeList: orangeList,
     });
     res.redirect("/survey/complete");
   } catch (err) {

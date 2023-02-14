@@ -36,16 +36,22 @@ const teams = [];
 
 /* GET  project teams page */
 router.get("/project-teams", async (req, res, next) => {
-  const allStudents = await Student.find().populate("greenList redList");
+  const allStudents = await Student.find().populate(
+    "greenList redList orangeList"
+  );
   res.render("teacher-views/projectTeams", {
     allStudents,
-    goodMatches,
-    okMatches,
+    user: req.session.user,
   });
 });
 
 router.post("/project-teams", async (req, res, next) => {
   teams.push(Object.keys(req.body));
+  // await Teacher.findOneAndUpdate(
+  //   { username: req.session.user.username },
+  //   { projectTeams: teams },
+  //   { new: true }
+  // );
   res.redirect("/user/project-teams");
   console.log(teams);
 });

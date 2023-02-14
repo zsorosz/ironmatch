@@ -1,41 +1,67 @@
 <h1>Create Project Teams</h1>
-<table class="table">
-  <thead>
-    <tr>
-      <th scope="col">#</th>
-      <th scope="col">Perfect</th>
-      <th scope="col">Good</th>
-      <th scope="col">OK</th>
-      <th scope="col">Bad</th>
-      <th scope="col">Very Bad</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% allStudents.forEach(student => { %>
-    <form action="/user/project-teams" method="POST" id="<%= student._id %>">
+<form action="/user/project-teams" method="POST">
+  <table class="table">
+    <thead>
       <tr>
-        <th scope="row">
-          <input type="checkbox" name="<%= student._id %>" /><%=
-          student.firstName %>
-        </th>
-        <td>
-          <% student.greenList.forEach((green) => { %> <%
-          if(green.greenList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= green._id %>" />
-          <%- green.firstName %><% } %> <% }) %>
-        </td>
-        <td></td>
-        <td></td>
-        <td></td>
-        <td>
-          <% student.redList.forEach((red) => { %> <%
-          if(red.redList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= red._id %>" />
-          <%- red.firstName %><% } %> <% }) %>
-        </td>
-        <td><button type="submit">Save</button></td>
+        <th scope="col">#</th>
+        <th scope="col">Perfect</th>
+        <th scope="col">Good</th>
+        <th scope="col">OK</th>
+        <th scope="col">Bad</th>
+        <th scope="col">Very Bad</th>
       </tr>
-    </form>
-    <% }) %>
-  </tbody>
-</table>
+    </thead>
+    <tbody class="projectTeams-tbody">
+      <% allStudents.forEach(student => { %>
+      <form action="/user/project-teams" method="POST" id="<%= student._id %>">
+        <tr>
+          <th scope="row">
+            <input type="checkbox" name="<%= student._id %>" /><%=
+            student.firstName %>
+          </th>
+          <td>
+            <% student.greenList.forEach((green) => { %>
+            <%if(green.greenList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= green._id %>" />
+            <%- green.firstName %><% } %> <% }) %>
+          </td>
+          <td>
+            <% student.greenList.forEach((green) => { %>
+            <%if(green.orangeList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= green._id %>" />
+            <%- green.firstName %><% } %> <% }) %> <%
+            student.orangeList.forEach((orange) => { %>
+            <%if(orange.greenList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= orange._id %>" />
+            <%- orange.firstName %><% } %> <% }) %>
+          </td>
+          <td>
+            <%student.orangeList.forEach((orange) => { %>
+            <%if(orange.orangeList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= orange._id %>" />
+            <%- orange.firstName %><% } %> <% }) %>
+          </td>
+          <td>
+            <% student.redList.forEach((red) => { %>
+            <%if(red.orangeList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= red._id %>" />
+            <%- red.firstName %><% } %> <% }) %> <%
+            student.orangeList.forEach((orange) => { %>
+            <%if(orange.redList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= orange._id %>" />
+            <%- orange.firstName %><% } %> <% }) %>
+          </td>
+          <td>
+            <% student.redList.forEach((red) => { %> <%
+            if(red.redList.includes(student._id)) { %>
+            <input type="checkbox" name="<%= red._id %>" />
+            <%- red.firstName %><% } %> <% }) %>
+          </td>
+          <td><button type="submit">Save</button></td>
+        </tr>
+      </form>
+      <% }) %>
+    </tbody>
+  </table>
+  <button type="submit">Submit</button>
+</form>

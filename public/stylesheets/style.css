@@ -88,3 +88,6 @@ h1 {
   background-color: rgb(235, 101, 101);
   color: white;
 }
+.projectTeams-tbody {
+  border-width: 1px !important
+}
