@@ -116,11 +116,14 @@
     <button
       type="button"
       class="btn btn-info"
-      data-bs-toggle="modal"
-      data-bs-target="#randomMatches"
+      onclick="window.location.href='/user/random-teams'"
     >
       Create random teams for lab work
     </button>
+    <div>
+      <input type="number" id="group-size" >
+      <label>Group size</label>
+    </div>
     <!-- Random teams pop-up -->
     <div
       class="modal fade"
@@ -143,11 +146,7 @@
             ></button>
           </div>
           <div class="modal-body">
-            <ul>
-              <% allStudents.forEach(student => { %>
-              <li><%= student.firstName %></li>
-              <% }) %>
-            </ul>
+
           </div>
           <div class="modal-footer">
             <button

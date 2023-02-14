@@ -1,0 +1,14 @@
+
+<form id="group-size" method="POST" action="/user/random-teams"> 
+    <input type="number" id="typeNumber" class="form-control" />
+    <label class="form-label" for="typeNumber">Group size</label>
+    <button type="submit" class="btn btn-info">Submit</button>
+</form>
+<% if (typeof random !== "undefined") { %>
+    <ul>
+        <% random.forEach(team => { %>
+         <li><%= team %></li>
+        <% }) %>
+    </ul>
+<% } %>
+
