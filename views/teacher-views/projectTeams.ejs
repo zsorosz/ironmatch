@@ -1,0 +1,43 @@
+<h1>Create Project Teams</h1>
+<table class="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Perfect</th>
+      <th scope="col">Good</th>
+      <th scope="col">OK</th>
+      <th scope="col">Bad</th>
+      <th scope="col">Very Bad</th>
+    </tr>
+  </thead>
+  <tbody>
+    <% allStudents.forEach(student => { %>
+    <form action="/user/project-teams" method="POST">
+      <tr>
+        <th scope="row">
+          <input type="checkbox" name="<%= student._id %>" /><%=
+          student.firstName %>
+        </th>
+        <td>
+          <% student.greenList.forEach((green) => { %><input
+            type="checkbox"
+            name="<%= green._id %>"
+          />
+          <%- green.firstName %> <% }) %>
+        </td>
+        <td>
+          <% student.redList.forEach((red) => { %><input
+            type="checkbox"
+            name="<%= student._id %>"
+          />
+          <%- red.firstName %> <% }) %>
+        </td>
+        <td></td>
+        <td></td>
+        <td></td>
+      </tr>
+      <button type="submit">Save</button>
+      <% }) %>
+    </form>
+  </tbody>
+</table>
