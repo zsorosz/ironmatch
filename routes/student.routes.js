@@ -1,5 +1,6 @@
 const router = require("express").Router();
 const Student = require("../models/Student.model");
+const uploader = require('../middleware/cloudinary.config');
 
 /* GET new student */
 router.get("/new", (req, res, next) => {
@@ -7,9 +8,15 @@ router.get("/new", (req, res, next) => {
 });
 
 /* POST new student */
-router.post("/new", async (req, res, next) => {
+router.post("/new", uploader.single("imageUrl"), async (req, res, next) => {
   try {
-    await Student.create(req.body);
+    console.log(req.file)
+    let image = ""
+    if(typeof req.file === "undefined") {
+      image = "/images/nerd.png"
+    }
+    else { image = req.file.path}
+    await Student.create({...req.body, imageUrl: image});
     res.redirect("/user/profile");
   } catch (err) {
     console.log("Ohh nooo, error", err);
@@ -39,10 +46,10 @@ router.get("/:id/edit", async (req, res) => {
 });
 
 /* POST update student*/
-router.post("/:id/edit", async (req, res) => {
+router.post("/:id/edit", uploader.single("imageUrl"), async (req, res) => {
   try {
-    await Student.findByIdAndUpdate(req.params.id, req.body);
-    res.redirect(`/student/${req.params.id}`);
+    await Student.findByIdAndUpdate(req.params.id, {...req.body, imageUrl: req.file.path}, {new:true});
+    res.redirect(`/user/profile`);
   } catch (err) {
     console.log("Ohh nooo, error", err);
   }

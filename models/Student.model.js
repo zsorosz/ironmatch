@@ -17,7 +17,9 @@ const studentSchema = new Schema({
     trim: true,
     unique: false,
   },
-  img: String,
+  imageUrl: {
+    type: String,
+  },
   surveyComplete: Boolean,
   greenList: {
     type: [Schema.Types.ObjectId],
@@ -27,6 +29,10 @@ const studentSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "Student",
   },
+  imageUrl: {
+    type: String,
+    trim: true,
+  }
 });
 
 const Student = model("Student", studentSchema);
