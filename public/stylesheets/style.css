@@ -88,6 +88,18 @@ h1 {
   background-color: rgb(235, 101, 101);
   color: white;
 }
-.projectTeams-tbody {
-  border-width: 1px !important
+.th-input {
+  margin-right: 10px;
 }
+.projectTeams-tbody td {
+  padding: 20px 10px;
+}
+.img-small {
+  width: 5rem;
+  height: 5rem;
+  object-fit: cover;
+}
+/* .student-index {
+  display: flex;
+  flex-direction: column;
+} */

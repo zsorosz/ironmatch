@@ -53,7 +53,7 @@ router.post("/project-teams", async (req, res, next) => {
   //   { new: true }
   // );
   res.redirect("/user/project-teams");
-  console.log(teams);
+  console.log(req.body);
 });
 
 module.exports = router;
