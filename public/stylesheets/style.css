@@ -78,3 +78,7 @@ h1 {
 .edit-btn {
   width: 50%;
 }
+.errorMessage {
+  background-color: rgb(235, 101, 101);
+  color: white;
+}
