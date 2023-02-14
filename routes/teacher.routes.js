@@ -14,8 +14,7 @@ router.get("/profile", async (req, res, next) => {
 });
 
 router.get("/random-teams", (req, res) => {
-  const pizza = false
-  res.render('teacher-views/random-teams', {pizza})
+  res.render('teacher-views/random-teams')
 })
 
 router.post("/random-teams", async (req, res) => {
@@ -25,8 +24,7 @@ router.post("/random-teams", async (req, res) => {
     studentNames.push(student.firstName);
   });
   let random = randomTeams(studentNames, 2);
-  const pizza = true
-  res.render('teacher-views/random-teams', {random, pizza} )
+  res.render('teacher-views/random-teams', {random} )
 })
 
 module.exports = router;
