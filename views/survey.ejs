@@ -1,22 +1,30 @@
-<section class="myClass">
+<% if (typeof surveyComplete !== "undefined") { %>
+ <h1 class="surveyComplete text-center">Thank you for comleting the survey!</h1>
+<% } else {%>
+
+<section class="container text-center myClass">
   <% if (page === 1) { %>
   <h1 class="mb-4">Hello <%= student.firstName %></h1>
-  <h4>With who would you like to work on your next project?</h4>
+  <h4>With who would you like to work on your next project? Select 5 students:</h4>
   <% } else { %>
-  <h4>Select maximum 3 students you would NOT like to work with</h4>
-  <% } %> <% if (errorMessage) { %>
-  <h4><%= errorMessage %></h4>
+  <h4>Select <strong>maximum 3 students</strong> you would NOT like to work with</h4>
+  <% } %> <% if (typeof errorMessage !== "undefined") { %>
+  <h4 class="errorMessage"><%= errorMessage %></h4>
   <% } %>
   <form <% if (page === 1) { %>
     action="/survey/<%= student._id %>"
   <% } else { %>
     action="/survey/<%= student._id %>/page2" 
     <% } %>
-    method="POST">
-    <% allStudents.forEach(stud => { %>
-    <input type="checkbox" name="<%= stud._id %>" /> <%= stud.firstName %>
-    <br />
-    <% }) %>
-    <button type="submit">Continue</button>
+    method="POST" class="mt-5">
+    <ul class="list-group text-start">
+        <% allStudents.forEach(stud => { %>
+            <li class="list-group-item">
+                <input type="checkbox" name="<%= stud._id %>" class="form-check-input me-1" /> <%= stud.firstName %>
+            </li>
+        <% }) %>
+    </ul>
+    <button type="submit" class="btn btn-info mt-5">Continue</button>
   </form>
 </section>
+<% } %>

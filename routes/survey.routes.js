@@ -4,7 +4,8 @@ const router = express.Router();
 
 /* GET survey completed */
 router.get("/complete", (req, res, next) => {
-  res.send("Thank you for completing the survey!");
+  const surveyComplete = true;
+  res.render("survey", { surveyComplete });
 });
 
 /* GET survey */
@@ -15,14 +16,10 @@ router.get("/:id", async (req, res, next) => {
       _id: { $not: { $eq: req.params.id } },
     });
     const page = 1;
-    const errorMessage = "";
-    const surveyComplete = false;
     res.render("survey", {
       student,
       allStudents,
-      errorMessage,
       page,
-      surveyComplete,
     });
   } catch (err) {
     console.log("Error in survey get route", err);
@@ -32,18 +29,18 @@ router.get("/:id", async (req, res, next) => {
 /* POST survey*/
 router.post("/:id", async (req, res) => {
   try {
-    if (Object.keys(req.body).length > 5) {
+    if (Object.keys(req.body).length !== 5) {
       const student = await Student.findById(req.params.id);
       const allStudents = await Student.find({
         _id: { $not: { $eq: req.params.id } },
       });
-      const errorMessage = "You selected too many options";
-      const surveyComplete = false;
+      const errorMessage = "Please select exactly 5 options";
+      const page = 1;
       res.render("survey", {
         student,
         allStudents,
         errorMessage,
-        surveyComplete,
+        page,
       });
     }
     const greenList = Object.keys(req.body);
@@ -62,17 +59,22 @@ router.get("/:id/page2", async (req, res, next) => {
   try {
     const student = await Student.findById(req.params.id).populate("greenList");
     const allStudents = await Student.find({
-      _id: { $not: { $eq: req.params.id } },
+      _id: {
+        $nin: [
+          req.params.id,
+          student.greenList[0]._id,
+          student.greenList[1]._id,
+          student.greenList[2]._id,
+          student.greenList[3]._id,
+          student.greenList[4]._id,
+        ],
+      },
     });
     const page = 2;
-    const errorMessage = "";
-    const surveyComplete = false;
     res.render("survey", {
       student,
       allStudents,
       page,
-      errorMessage,
-      surveyComplete,
     });
   } catch (err) {
     console.log("Error in survey get route", err);
@@ -85,17 +87,24 @@ router.post("/:id/page2", async (req, res) => {
     if (Object.keys(req.body).length > 3) {
       const student = await Student.findById(req.params.id);
       const allStudents = await Student.find({
-        _id: { $not: { $eq: req.params.id } },
+        _id: {
+          $nin: [
+            req.params.id,
+            student.greenList[0]._id,
+            student.greenList[1]._id,
+            student.greenList[2]._id,
+            student.greenList[3]._id,
+            student.greenList[4]._id,
+          ],
+        },
       });
       const page = 2;
       const errorMessage = "You selected too many options";
-      const surveyComplete = false;
       res.render("survey", {
         student,
         allStudents,
         errorMessage,
         page,
-        surveyComplete,
       });
     }
     const redList = Object.keys(req.body);
