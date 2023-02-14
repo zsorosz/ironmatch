@@ -12,32 +12,30 @@
   </thead>
   <tbody>
     <% allStudents.forEach(student => { %>
-    <form action="/user/project-teams" method="POST">
+    <form action="/user/project-teams" method="POST" id="<%= student._id %>">
       <tr>
         <th scope="row">
           <input type="checkbox" name="<%= student._id %>" /><%=
           student.firstName %>
         </th>
         <td>
-          <% student.greenList.forEach((green) => { %><input
-            type="checkbox"
-            name="<%= green._id %>"
-          />
-          <%- green.firstName %> <% }) %>
+          <% student.greenList.forEach((green) => { %> <%
+          if(green.greenList.includes(student._id)) { %>
+          <input type="checkbox" name="<%= green._id %>" />
+          <%- green.firstName %><% } %> <% }) %>
         </td>
+        <td></td>
+        <td></td>
+        <td></td>
         <td>
-          <% student.redList.forEach((red) => { %><input
-            type="checkbox"
-            name="<%= student._id %>"
-          />
-          <%- red.firstName %> <% }) %>
+          <% student.redList.forEach((red) => { %> <%
+          if(red.redList.includes(student._id)) { %>
+          <input type="checkbox" name="<%= red._id %>" />
+          <%- red.firstName %><% } %> <% }) %>
         </td>
-        <td></td>
-        <td></td>
-        <td></td>
+        <td><button type="submit">Save</button></td>
       </tr>
-      <button type="submit">Save</button>
-      <% }) %>
     </form>
+    <% }) %>
   </tbody>
 </table>

@@ -3,6 +3,7 @@ const { isLoggedIn } = require("../middleware/route-guard");
 const Teacher = require("../models/Teacher.model");
 const Student = require("../models/Student.model");
 const randomTeams = require("../utils/randomTeams");
+const { goodMatches, okMatches } = require("../utils/projectTeams");
 
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
@@ -28,6 +29,25 @@ router.post("/random-teams", async (req, res) => {
   let groupSize = req.body.typeNumber;
   let random = randomTeams(studentNames, groupSize);
   res.render("teacher-views/random-teams", { random });
+});
+
+/////////////////Project teams//////////////////
+const teams = [];
+
+/* GET  project teams page */
+router.get("/project-teams", async (req, res, next) => {
+  const allStudents = await Student.find().populate("greenList redList");
+  res.render("teacher-views/projectTeams", {
+    allStudents,
+    goodMatches,
+    okMatches,
+  });
+});
+
+router.post("/project-teams", async (req, res, next) => {
+  teams.push(Object.keys(req.body));
+  res.redirect("/user/project-teams");
+  console.log(teams);
 });
 
 module.exports = router;
