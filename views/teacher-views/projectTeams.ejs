@@ -23,45 +23,31 @@
           </div>
         </th>
         <td>
-          <% student.greenList.forEach((green) => { %>
-          <%if(green.greenList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= green._id %>" />
-          <%- green.firstName %><% } %> <% }) %>
+          <% createMatches(student).perfect.forEach((match) => { %>
+          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+          <%- match.firstName %> <% }) %>
         </td>
         <td>
-          <% student.greenList.forEach((green) => { %>
-          <%if(green.orangeList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= green._id %>" />
-          <%- green.firstName %><% } %> <% }) %> <%
-          student.orangeList.forEach((orange) => { %>
-          <%if(orange.greenList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= orange._id %>" />
-          <%- orange.firstName %><% } %> <% }) %>
+          <% createMatches(student).good.forEach((match) => { %>
+          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+          <%- match.firstName %> <% }) %>
         </td>
         <td>
-          <%student.orangeList.forEach((orange) => { %>
-          <%if(orange.orangeList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= orange._id %>" />
-          <%- orange.firstName %><% } %> <% }) %>
+          <% createMatches(student).ok.forEach((match) => { %>
+          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+          <%- match.firstName %> <% }) %>
         </td>
         <td>
-          <% student.redList.forEach((red) => { %>
-          <%if(red.orangeList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= red._id %>" />
-          <%- red.firstName %><% } %> <% }) %> <%
-          student.orangeList.forEach((orange) => { %>
-          <%if(orange.redList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= orange._id %>" />
-          <%- orange.firstName %><% } %> <% }) %>
+          <% createMatches(student).bad.forEach((match) => { %>
+          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+          <%- match.firstName %> <% }) %>
         </td>
         <td>
-          <% student.redList.forEach((red) => { %> <%
-          if(red.redList.includes(student._id)) { %>
-          <input type="checkbox" name="<%= student._id %>-<%= red._id %>" />
-          <%- red.firstName %><% } %> <% }) %>
+          <% createMatches(student).veryBad.forEach((match) => { %>
+          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+          <%- match.firstName %> <% }) %>
         </td>
       </tr>
-
       <% }) %>
     </tbody>
   </table>

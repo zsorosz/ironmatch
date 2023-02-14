@@ -3,7 +3,7 @@ const { isLoggedIn } = require("../middleware/route-guard");
 const Teacher = require("../models/Teacher.model");
 const Student = require("../models/Student.model");
 const randomTeams = require("../utils/randomTeams");
-const { goodMatches, okMatches } = require("../utils/projectTeams");
+const createMatches = require("../utils/projectTeams");
 
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
@@ -42,6 +42,7 @@ router.get("/project-teams", async (req, res, next) => {
   res.render("teacher-views/projectTeams", {
     allStudents,
     user: req.session.user,
+    createMatches,
   });
 });
 
