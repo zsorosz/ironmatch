@@ -25,20 +25,9 @@ router.post("/random-teams", async (req, res) => {
   allStudents.forEach((student) => {
     studentNames.push(student.firstName);
   });
-  let random = randomTeams(studentNames, 2);
+  let groupSize = req.body.typeNumber;
+  let random = randomTeams(studentNames, groupSize);
   res.render("teacher-views/random-teams", { random });
 });
-
-/////////////////Project teams//////////////////
-
-/* GET  project teams page */
-router.get("/project-teams", async (req, res, next) => {
-  const allStudents = await Student.find().populate("greenList redList");
-  res.render("teacher-views/projectTeams", {
-    allStudents,
-  });
-});
-
-// router.post("/project-teams");
 
 module.exports = router;
