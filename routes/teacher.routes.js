@@ -23,7 +23,8 @@ router.post("/random-teams", async (req, res) => {
   allStudents.forEach((student) => {
     studentNames.push(student.firstName);
   });
-  let random = randomTeams(studentNames, 2);
+  let groupSize = req.body.typeNumber
+  let random = randomTeams(studentNames, groupSize);
   res.render('teacher-views/random-teams', {random} )
 })
 
