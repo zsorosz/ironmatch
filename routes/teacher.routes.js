@@ -5,6 +5,8 @@ const Student = require("../models/Student.model");
 const randomTeams = require("../utils/randomTeams");
 const { createMatches, createTeams } = require("../utils/projectTeams");
 
+const downloadResource  = require('../utils/utilCsv');
+
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
   const allStudents = await Student.find();
@@ -28,8 +30,21 @@ router.post("/random-teams", async (req, res) => {
   });
   let groupSize = req.body.typeNumber;
   let random = randomTeams(studentNames, groupSize);
+  console.log(random)
 
   res.render("teacher-views/random-teams", { random });
+});
+
+router.get('/random-teams/download', (req, res) => {
+  const fields = [
+    {
+      label: 'First Name',
+      value: 'firstName'
+    },
+  ];
+  const data = Student.find()
+  downloadResource(res, "user.csv", fields, data)
+  res.render('/teacher-views/random-teams')
 });
 
 
