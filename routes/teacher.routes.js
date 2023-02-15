@@ -5,6 +5,7 @@ const Student = require("../models/Student.model");
 const Team = require("../models/Team.model");
 const randomTeams = require("../utils/randomTeams");
 const { createMatches, createTeams } = require("../utils/projectTeams");
+const { Error } = require("mongoose");
 
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
@@ -50,15 +51,35 @@ router.get("/project-teams", async (req, res, next) => {
 
 router.post("/project-teams", async (req, res, next) => {
   try {
-    await Team.deleteMany();
+    const allStudents = await Student.find().populate(
+      "greenList redList orangeList"
+    );
     let finalTeams = createTeams(Object.keys(req.body));
     const teacher = await Teacher.findOne({
       username: req.session.user.username,
     });
-    finalTeams.forEach((team) => {
-      Team.create({ owner: teacher._id, team: team });
+    const flatArr = finalTeams.flat();
+    let errorMessage = "";
+    flatArr.forEach((id) => {
+      if (flatArr.indexOf(id) !== flatArr.lastIndexOf(id)) {
+        errorMessage = "You added the same student to multiple teams.";
+      }
     });
-    res.redirect("/user/project-teams/teams");
+    console.log(errorMessage);
+    if (!errorMessage) {
+      await Team.deleteMany();
+      finalTeams.forEach((team) => {
+        Team.create({ owner: teacher._id, team: team });
+      });
+      res.redirect("/user/project-teams/teams");
+    } else {
+      res.render("teacher-views/projectTeams", {
+        allStudents,
+        user: req.session.user,
+        createMatches,
+        errorMessage,
+      });
+    }
   } catch (err) {
     console.log("There was an error in the post project teams route", err);
   }

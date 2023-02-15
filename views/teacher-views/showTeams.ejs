@@ -1,26 +1,28 @@
-<h1>Here are your teams:</h1>
+<div class="container mt-5 text-center">
+  <h1>Here are your teams:</h1>
 
-<ul>
-  <% teams.forEach(team => { %>
-  <li>
-    <% team.team.forEach((student) => { %> <%= student.firstName %> <% }) %>
-  </li>
-  <% }) %>
-</ul>
-<div class="btn-container">
-  <button
-    type="button"
-    class="btn btn-secondary"
-    onclick="window.location.href='/user/project-teams'"
-  >
-    Create new teams
-  </button>
-  <button
-    type="button"
-    class="btn btn-primary"
-    id="downloadCSV"
-    onclick="window.location.href='/project-teams/download'"
-  >
-    Download CSV
-  </button>
+  <ul class="list-group list-group-flush">
+    <% teams.forEach(team => { %>
+    <li class="list-group-item pt-3 pb-3 fs-6">
+      <% team.team.forEach((student) => { %> <%= student.firstName %> <% }) %>
+    </li>
+    <% }) %>
+  </ul>
+  <div class="btn-container mt-3">
+    <button
+      type="button"
+      class="btn btn-secondary"
+      onclick="window.location.href='/user/project-teams'"
+    >
+      Create new teams
+    </button>
+    <button
+      type="button"
+      class="btn btn-primary"
+      id="downloadCSV"
+      onclick="window.location.href='/project-teams/download'"
+    >
+      Download CSV
+    </button>
+  </div>
 </div>
