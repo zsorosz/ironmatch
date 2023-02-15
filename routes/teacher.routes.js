@@ -2,6 +2,7 @@ const router = require("express").Router();
 const { isLoggedIn } = require("../middleware/route-guard");
 const Teacher = require("../models/Teacher.model");
 const Student = require("../models/Student.model");
+const Team = require("../models/Team.model");
 const randomTeams = require("../utils/randomTeams");
 const { createMatches, createTeams } = require("../utils/projectTeams");
 
@@ -65,12 +66,14 @@ router.get("/project-teams", async (req, res, next) => {
 
 router.post("/project-teams", async (req, res, next) => {
   try {
+    await Team.deleteMany();
     let finalTeams = createTeams(Object.keys(req.body));
-    await Teacher.findOneAndUpdate(
-      { username: req.session.user.username },
-      { projectTeams: finalTeams },
-      { new: true }
-    );
+    const teacher = await Teacher.findOne({
+      username: req.session.user.username,
+    });
+    finalTeams.forEach((team) => {
+      Team.create({ owner: teacher._id, team: team });
+    });
     res.redirect("/user/project-teams/teams");
   } catch (err) {
     console.log("There was an error in the post project teams route", err);
@@ -81,9 +84,9 @@ router.get("/project-teams/teams", async (req, res) => {
   try {
     const teacher = await Teacher.findOne({
       username: req.session.user.username,
-    }).populate("projectTeams");
-    console.log(teacher);
-    res.render("teacher-views/showTeams", { teacher });
+    });
+    const teams = await Team.find({ owner: teacher }).populate("team owner");
+    res.render("teacher-views/showTeams", { teams });
   } catch (err) {
     console.log("There was an error in the get project teams route", err);
   }
