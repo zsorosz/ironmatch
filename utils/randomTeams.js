@@ -22,3 +22,12 @@ const randomGroup = (students, groupSize) => {
 
   
 module.exports = randomGroup 
+
+
+for(let i=0; i < finalTeams.length; i++){
+  for(let j=0; j < finalTeams.length; j++) {
+    if (finalTeams[i].sort().join(',') !== finalTeams[j].sort().join(',')) {
+      reallyFinalTeams.push(finalTeams[i])
+    }
+  }
+}

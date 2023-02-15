@@ -29,4 +29,3 @@ router.post("/random-teams", async (req, res) => {
 })
 
 module.exports = router;
-
