@@ -2,29 +2,45 @@
   <h2>Add a new student</h2>
   <div class="row form-container">
     <div class="col-md-6">
-      <form action="/student/new" method="POST" class="student-form" enctype="multipart/form-data" >
+      <form
+        action="/student/new"
+        method="POST"
+        class="student-form"
+        enctype="multipart/form-data"
+      >
         <div class="form-group">
           <label
             >First name:*
-            <input type="text" name="firstName" class="form-control" required />
+            <input
+              type="text"
+              name="firstName"
+              class="form-control mt-3"
+              required
+            />
           </label>
         </div>
         <div class="form-group">
           <label
             >Last name:
-            <input type="text" name="lastName" class="form-control" />
+            <input type="text" name="lastName" class="form-control mt-3" />
           </label>
         </div>
         <div class="form-group">
           <label
             >Email:
-            <input type="email" name="email" class="form-control" />
+            <input type="email" name="email" class="form-control mt-3" />
           </label>
         </div>
         <div class="form-group">
           <label
             >Photo:
-            <input type="file" name="imageUrl" class="form-control-file" accept="image/png, image/jpg" />
+            <input
+              id="formFile"
+              type="file"
+              name="imageUrl"
+              class="form-control form-control-file mt-3"
+              accept="image/png, image/jpg"
+            />
           </label>
         </div>
         <button type="submit" class="btn btn-info">Create</button>

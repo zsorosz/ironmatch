@@ -29,10 +29,14 @@ const studentSchema = new Schema({
     type: [Schema.Types.ObjectId],
     ref: "Student",
   },
+  orangeList: {
+    type: [Schema.Types.ObjectId],
+    ref: "Student",
+  },
   imageUrl: {
     type: String,
     trim: true,
-  }
+  },
 });
 
 const Student = model("Student", studentSchema);

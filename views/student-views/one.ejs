@@ -5,19 +5,19 @@
       <h5 class="card-title fw-bold"><%= foundStudent.firstName %></h5>
     </div>
     <ul class="list-group list-group-flush">
-      <li class="list-group-item">
+      <li class="list-group-item pt-3 pb-3">
         <span class="fw-bold">First name: </span><%= foundStudent.firstName %>
       </li>
-      <li class="list-group-item">
+      <li class="list-group-item pt-3 pb-3">
         <span class="fw-bold">Last name: </span><%= foundStudent.lastName %>
       </li>
-      <li class="list-group-item">
+      <li class="list-group-item pt-3 pb-3">
         <span class="fw-bold">Email: </span><%= foundStudent.email %>
       </li>
       <% if (foundStudent.greenList.length) { %>
-      <li class="list-group-item">
+      <li class="list-group-item pt-3 pb-3">
         <span class="fw-bold">Would like to work with: </span>
-        <ul class="list-inline">
+        <ul class="list-inline pt-3">
           <% foundStudent.greenList.forEach(el => { %>
           <li class="list-inline-item"><%= el.firstName %></li>
           <% }) %>
@@ -25,9 +25,9 @@
         <% } %>
       </li>
       <% if (foundStudent.redList.length) { %>
-      <li class="list-group-item">
+      <li class="list-group-item pt-3 pb-3">
         <span class="fw-bold">Would not like to work with: </span>
-        <ul class="list-inline">
+        <ul class="list-inline pt-3">
           <% foundStudent.redList.forEach(el => { %>
           <li class="list-inline-item"><%= el.firstName %></li>
           <% }) %>

@@ -1,7 +1,7 @@
 <%- include('../partials/nav.ejs') %>
 
 <main>
-  <section class="manageClass">
+  <section class="manageClass mt-3">
     <button
       type="button"
       class="btn btn-info"
@@ -39,11 +39,11 @@
             ></button>
           </div>
           <div class="modal-body">
-            <ul>
+            <ul class="list-group list-group-flush">
               <% allStudents.forEach(student => { %>
-              <li>
-                <%= student.firstName %>: http://localhost:3000/survey/<%=
-                student._id %>
+              <li class="list-group-item pt-3 pb-3">
+                <span class="fw-bold"><%= student.firstName %></span> -
+                http://localhost:3000/survey/<%= student._id %>
               </li>
               <% }) %>
             </ul>
@@ -66,12 +66,8 @@
       class="btn btn-info"
       onclick="window.location.href='/user/random-teams'"
     >
-      Create random teams for lab work
+      Create random teams
     </button>
-    <div>
-      <input type="number" id="group-size" >
-      <label>Group size</label>
-    </div>
     <!-- Random teams pop-up -->
     <div
       class="modal fade"
@@ -93,9 +89,7 @@
               aria-label="Close"
             ></button>
           </div>
-          <div class="modal-body">
-
-          </div>
+          <div class="modal-body"></div>
           <div class="modal-footer">
             <button
               type="button"
@@ -120,16 +114,16 @@
     <button
       type="button"
       class="btn btn-info"
-      onclick="window.location.href='/'"
+      onclick="window.location.href='/user/project-teams'"
     >
-      Create project teams
+      Create custom teams
     </button>
   </section>
   <section class="myClass">
     <h1 class="mb-4">My class:</h1>
     <div class="allStudents">
       <% allStudents.forEach(student => { %>
-      <div class="card" style="width: 18rem">
+      <div class="card" style="width: 15rem">
         <img
           src="<%- student.imageUrl %>"
           class="card-img-top"
