@@ -1,0 +1,7 @@
+<h1>Here are your teams:</h1>
+
+<ul>
+  <% teacher.projectTeams.forEach(team => { %>
+  <li><% team.forEach((student) => { %> <%= student.firstName %> <% }) %></li>
+  <% }) %>
+</ul>
