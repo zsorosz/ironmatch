@@ -1,7 +1,7 @@
 <%- include('../partials/nav.ejs') %>
 
 <main>
-  <section class="manageClass">
+  <section class="manageClass mt-3">
     <button
       type="button"
       class="btn btn-info"
@@ -66,7 +66,7 @@
       class="btn btn-info"
       onclick="window.location.href='/user/random-teams'"
     >
-      Create random teams for lab work
+      Create random teams
     </button>
     <!-- Random teams pop-up -->
     <div
@@ -116,14 +116,14 @@
       class="btn btn-info"
       onclick="window.location.href='/user/project-teams'"
     >
-      Create project teams
+      Create custom teams
     </button>
   </section>
   <section class="myClass">
     <h1 class="mb-4">My class:</h1>
     <div class="allStudents">
       <% allStudents.forEach(student => { %>
-      <div class="card" style="width: 18rem">
+      <div class="card" style="width: 15rem">
         <img
           src="<%- student.imageUrl %>"
           class="card-img-top"

@@ -3,7 +3,7 @@ const { isLoggedIn } = require("../middleware/route-guard");
 const Teacher = require("../models/Teacher.model");
 const Student = require("../models/Student.model");
 const randomTeams = require("../utils/randomTeams");
-const createMatches = require("../utils/projectTeams");
+const { createMatches, createTeams } = require("../utils/projectTeams");
 
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
@@ -32,7 +32,7 @@ router.post("/random-teams", async (req, res) => {
 });
 
 /////////////////Project teams//////////////////
-const teams = [];
+// const teams = [];
 
 /* GET  project teams page */
 router.get("/project-teams", async (req, res, next) => {
@@ -47,14 +47,29 @@ router.get("/project-teams", async (req, res, next) => {
 });
 
 router.post("/project-teams", async (req, res, next) => {
-  teams.push(Object.keys(req.body));
-  // await Teacher.findOneAndUpdate(
-  //   { username: req.session.user.username },
-  //   { projectTeams: teams },
-  //   { new: true }
-  // );
-  res.redirect("/user/project-teams");
-  console.log(req.body);
+  try {
+    let finalTeams = createTeams(Object.keys(req.body));
+    await Teacher.findOneAndUpdate(
+      { username: req.session.user.username },
+      { projectTeams: finalTeams },
+      { new: true }
+    );
+    res.redirect("/user/project-teams/teams");
+  } catch (err) {
+    console.log("There was an error in the post project teams route", err);
+  }
+});
+
+router.get("/project-teams/teams", async (req, res) => {
+  try {
+    const teacher = await Teacher.findOne({
+      username: req.session.user.username,
+    }).populate("projectTeams");
+    console.log(teacher);
+    res.render("teacher-views/showTeams", { teacher });
+  } catch (err) {
+    console.log("There was an error in the get project teams route", err);
+  }
 });
 
 module.exports = router;

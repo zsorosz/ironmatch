@@ -1,5 +1,5 @@
 body {
-  padding: 50px;
+  padding: 0 50px;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
@@ -27,7 +27,7 @@ h1 {
 }
 
 .card-img-top {
-  height: 20rem;
+  height: 15rem;
   object-fit: cover;
 }
 

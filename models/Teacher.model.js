@@ -11,10 +11,12 @@ const teacherSchema = new Schema({
     trim: true,
     required: true,
   },
-  projectTeams: {
-    type: [Schema.Types.ObjectId],
-    ref: "Student",
-  },
+  projectTeams: [
+    {
+      type: [Schema.Types.ObjectId],
+      ref: "Student",
+    },
+  ],
 });
 
 const Teacher = model("Teacher", teacherSchema);

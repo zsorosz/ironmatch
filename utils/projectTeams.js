@@ -57,4 +57,42 @@ const createMatches = (student) => {
   return matches;
 };
 
-module.exports = createMatches;
+const createTeams = (teams) => {
+  let finalTeams = [];
+  teams.forEach((studentId) => {
+    if (studentId.length < 25) {
+      let groupName = new Array(studentId);
+      finalTeams.push(groupName);
+    } else {
+      let firstId = studentId.slice(0, 24);
+      let secondId = studentId.slice(25, studentId.length);
+      finalTeams.forEach((team) => {
+        if (team.includes(firstId) && !team.includes(secondId)) {
+          team.push(secondId);
+        }
+      });
+    }
+  });
+  let reallyFinalTeams = [];
+
+  finalTeams.forEach((team) => {
+    reallyFinalTeams.push(team.sort().join(","));
+  });
+
+  const reallyReallyFinalTeams = [...new Set(reallyFinalTeams)];
+
+  let result = [];
+
+  reallyReallyFinalTeams.forEach((team) => {
+    let groupName = new Array(team);
+    result.push(groupName);
+  });
+
+  let finalResult = [];
+  result.forEach((team) => {
+    finalResult.push(team[0].split(","));
+  });
+  return finalResult;
+};
+
+module.exports = { createMatches, createTeams };
