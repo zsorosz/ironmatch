@@ -1,7 +1,26 @@
 <h1>Here are your teams:</h1>
 
 <ul>
-  <% teacher.projectTeams.forEach(team => { %>
-  <li><% team.forEach((student) => { %> <%= student.firstName %> <% }) %></li>
+  <% teams.forEach(team => { %>
+  <li>
+    <% team.team.forEach((student) => { %> <%= student.firstName %> <% }) %>
+  </li>
   <% }) %>
 </ul>
+<div class="btn-container">
+  <button
+    type="button"
+    class="btn btn-secondary"
+    onclick="window.location.href='/user/project-teams'"
+  >
+    Create new teams
+  </button>
+  <button
+    type="button"
+    class="btn btn-primary"
+    id="downloadCSV"
+    onclick="window.location.href='/project-teams/download'"
+  >
+    Download CSV
+  </button>
+</div>
