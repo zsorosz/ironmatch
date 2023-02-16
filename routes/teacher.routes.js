@@ -41,12 +41,12 @@ router.get('/random-teams/download', async (req, res) => {
   const fields = [
     {
       label: 'First Name',
-      value: 'randomTeams'
+      value: 'asd'
     },
   ];
   const teacher =  await Teacher.find({username: req.session.user.username})
+  console.log(teacher)
   downloadResource(res, "user.csv", fields, teacher)
-  res.render('/teacher-views/random-teams')
 });
 
 
@@ -118,27 +118,19 @@ router.get("/project-teams/teams", async (req, res) => {
 router.get('/project-teams/teams/download', async (req, res) => {
   const fields = [
     {
-      label: 'First Name',
-      value: 'firstName'
+      label: 'Team',
+      value: 'team',
     },
   ];
   const allTeams =  await Team.find().populate('team')
-  class Teams {
-    constructor(name) {
-      this.name = name;
-    }
-  }
+
   let data = []
-  await allTeams.forEach((el) => {
-    console.log(el)
-   /*  el.forEach((student) => {
-      let newTeam = new Teams(student.firstName)
-      data.push(newTeam)
-    }) */
+ /*  console.log(allTeams) */
+  allTeams.forEach((el) => {
+    let innerArr = el.team
+    data.push({team: innerArr.map(student => student.firstName).join(',')})
   })
-/*   console.log(data) */
   downloadResource(res, "user.csv", fields, data)
-  res.render('teacher-views/showTeams')
 });
 
 module.exports = router;
