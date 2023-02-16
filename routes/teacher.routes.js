@@ -8,7 +8,8 @@ const { createMatches, createTeams } = require("../utils/projectTeams");
 
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
-  const allStudents = await Student.find();
+  const teacher = await Teacher.findOne({ username: req.session.user.username });
+  const allStudents = await Student.find({ teacher: teacher._id });
   res.render("teacher-views/profile", {
     user: req.session.user,
     allStudents,
@@ -22,7 +23,8 @@ router.get("/random-teams", (req, res) => {
 });
 
 router.post("/random-teams", async (req, res) => {
-  const allStudents = await Student.find();
+  const teacher = await Teacher.findOne({ username: req.session.user.username });
+  const allStudents = await Student.find({ teacher: teacher._id});
   const studentNames = [];
   allStudents.forEach((student) => {
     studentNames.push(student.firstName);
@@ -40,7 +42,8 @@ router.post("/random-teams", async (req, res) => {
 
 /* GET  project teams page */
 router.get("/project-teams", async (req, res, next) => {
-  const allStudents = await Student.find().populate(
+  const teacher = await Teacher.findOne({ username: req.session.user.username });
+  const allStudents = await Student.find({ teacher: teacher._id }).populate(
     "greenList redList orangeList"
   );
   res.render("teacher-views/projectTeams", {
@@ -50,15 +53,16 @@ router.get("/project-teams", async (req, res, next) => {
   });
 });
 
+/* POST create project teams */
 router.post("/project-teams", async (req, res, next) => {
   try {
-    const allStudents = await Student.find().populate(
-      "greenList redList orangeList"
-    );
-    let finalTeams = createTeams(Object.keys(req.body));
     const teacher = await Teacher.findOne({
       username: req.session.user.username,
     });
+    const allStudents = await Student.find({ teacher: teacher._id}).populate(
+      "greenList redList orangeList"
+    );
+    let finalTeams = createTeams(Object.keys(req.body));
     const flatArr = finalTeams.flat();
     let errorMessage = "";
     flatArr.forEach((id) => {
