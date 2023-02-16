@@ -29,7 +29,9 @@ router.post("/random-teams", async (req, res) => {
   });
   let groupSize = req.body.typeNumber;
   let random = randomTeams(studentNames, groupSize);
-
+  const filter = { username: req.session.user.username };
+  const update = { randomTeams: random };
+  await Teacher.findOneAndUpdate(filter, update, {new: true});
   res.render("teacher-views/random-teams", { random });
 });
 
@@ -50,15 +52,37 @@ router.get("/project-teams", async (req, res, next) => {
 
 router.post("/project-teams", async (req, res, next) => {
   try {
-    await Team.deleteMany();
+    const allStudents = await Student.find().populate(
+      "greenList redList orangeList"
+    );
     let finalTeams = createTeams(Object.keys(req.body));
     const teacher = await Teacher.findOne({
       username: req.session.user.username,
     });
-    finalTeams.forEach((team) => {
-      Team.create({ owner: teacher._id, team: team });
+    const flatArr = finalTeams.flat();
+    let errorMessage = "";
+    flatArr.forEach((id) => {
+      if (flatArr.indexOf(id) !== flatArr.lastIndexOf(id)) {
+        errorMessage = "You added the same student to multiple teams.";
+      }
     });
-    res.redirect("/user/project-teams/teams");
+    if (!errorMessage) {
+      await Team.deleteMany();
+      finalTeams.forEach((team) => {
+        Team.create({ owner: teacher._id, team: team });
+      });
+      const filter = { username: req.session.user.username };
+      const update = { projectTeams: finalTeams };
+      await Teacher.findOneAndUpdate(filter, update, {new: true});
+      res.redirect("/user/project-teams/teams");
+    } else {
+      res.render("teacher-views/projectTeams", {
+        allStudents,
+        user: req.session.user,
+        createMatches,
+        errorMessage,
+      });
+    }
   } catch (err) {
     console.log("There was an error in the post project teams route", err);
   }
