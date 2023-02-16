@@ -40,13 +40,17 @@ router.post("/random-teams", async (req, res) => {
 router.get('/random-teams/download', async (req, res) => {
   const fields = [
     {
-      label: 'First Name',
-      value: 'asd'
+      label: 'Random Teams',
+      value: 'team'
     },
   ];
-  const teacher =  await Teacher.find({username: req.session.user.username})
-  console.log(teacher)
-  downloadResource(res, "user.csv", fields, teacher)
+  const teacher =  await Teacher.findOne({username: req.session.user.username})
+  data = []
+  let randomTeams = teacher.randomTeams
+  randomTeams.forEach ((element) => {
+    data.push({team: element.map(team => team).join(',')})
+  })
+  downloadResource(res, "user.csv", fields, data)
 });
 
 
@@ -125,7 +129,6 @@ router.get('/project-teams/teams/download', async (req, res) => {
   const allTeams =  await Team.find().populate('team')
 
   let data = []
- /*  console.log(allTeams) */
   allTeams.forEach((el) => {
     let innerArr = el.team
     data.push({team: innerArr.map(student => student.firstName).join(',')})
