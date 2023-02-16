@@ -36,7 +36,7 @@ router.post("/random-teams", async (req, res) => {
   res.render("teacher-views/random-teams", { random });
 });
 
-router.get('/random-teams/download', (req, res) => {
+/* router.get('/random-teams/download', (req, res) => {
   const fields = [
     {
       label: 'First Name',
@@ -46,7 +46,7 @@ router.get('/random-teams/download', (req, res) => {
   const data = Student.find()
   downloadResource(res, "user.csv", fields, data)
   res.render('/teacher-views/random-teams')
-});
+}); */
 
 
 /////////////////Project teams//////////////////
@@ -90,6 +90,18 @@ router.get("/project-teams/teams", async (req, res) => {
   } catch (err) {
     console.log("There was an error in the get project teams route", err);
   }
+});
+
+router.get('/project-teams/teams/download', (req, res) => {
+  const fields = [
+    {
+      label: 'First Name',
+      value: 'firstName'
+    },
+  ];
+  const data = Student.find()
+  downloadResource(res, "user.csv", fields, data)
+  res.render('teacher-views/showTeams')
 });
 
 module.exports = router;
