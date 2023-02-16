@@ -11,10 +11,12 @@ router.get("/complete", (req, res, next) => {
 /* GET survey */
 router.get("/:id", async (req, res, next) => {
   try {
-    const student = await Student.findById(req.params.id);
+    const student = await Student.findById(req.params.id).populate('teacher');
+    const teacher = student.teacher;
     const allStudents = await Student.find({
-      _id: { $not: { $eq: req.params.id } },
-    });
+      _id: { $not: { $eq: req.params.id } }, teacher: { $eq: teacher._id } }
+    );
+    console.log(teacher._id)
     const page = 1;
     res.render("survey", {
       student,
@@ -30,9 +32,10 @@ router.get("/:id", async (req, res, next) => {
 router.post("/:id", async (req, res) => {
   try {
     if (Object.keys(req.body).length !== 5) {
-      const student = await Student.findById(req.params.id);
+      const student = await Student.findById(req.params.id).populate('teacher');
+    const teacher = student.teacher;
       const allStudents = await Student.find({
-        _id: { $not: { $eq: req.params.id } },
+        _id: { $not: { $eq: req.params.id } }, teacher: { $eq: teacher._id }
       });
       const errorMessage = "Please select exactly 5 options";
       const page = 1;
@@ -57,7 +60,8 @@ router.post("/:id", async (req, res) => {
 /* GET survey page 2 */
 router.get("/:id/page2", async (req, res, next) => {
   try {
-    const student = await Student.findById(req.params.id).populate("greenList");
+    const student = await Student.findById(req.params.id).populate("greenList teacher");
+    const teacher = student.teacher;
     const allStudents = await Student.find({
       _id: {
         $nin: [
@@ -68,7 +72,7 @@ router.get("/:id/page2", async (req, res, next) => {
           student.greenList[3]._id,
           student.greenList[4]._id,
         ],
-      },
+      }, teacher: { $eq: teacher._id }
     });
     const page = 2;
     res.render("survey", {
@@ -84,7 +88,8 @@ router.get("/:id/page2", async (req, res, next) => {
 /* POST survey page 2 */
 router.post("/:id/page2", async (req, res) => {
   try {
-    const student = await Student.findById(req.params.id);
+    const student = await Student.findById(req.params.id).populate('teacher');
+    const teacher = student.teacher;
     if (Object.keys(req.body).length !== 3) {
       const allStudents = await Student.find({
         _id: {
@@ -96,7 +101,7 @@ router.post("/:id/page2", async (req, res) => {
             student.greenList[3]._id,
             student.greenList[4]._id,
           ],
-        },
+        }, teacher: { $eq: teacher._id }
       });
       const page = 2;
       const errorMessage = "Please select exactly 3 students";
@@ -121,7 +126,7 @@ router.post("/:id/page2", async (req, res) => {
           redList[1],
           redList[2],
         ],
-      },
+      }, teacher: { $eq: teacher._id }
     });
     await Student.findByIdAndUpdate(req.params.id, {
       ...req.body,
