@@ -1,10 +1,14 @@
 <%- include('../partials/nav.ejs') %>  
-<h1 class="mb-5 mt-5">Create Project Teams</h1>
+<main class="profile-ctn">
 <% if (typeof errorMessage !== "undefined") { %>
 <h4 class="errorMessage"><%= errorMessage %></h4>
 <% } %>
 <form action="/user/project-teams" method="POST">
-  <table class="table  table-hover table-bordered">
+  <div class="form-header">
+    <h1 class="mb-5 mt-5">Create Project Teams</h1>
+    <button type="submit" class="btn btn-info btn-lg">Submit</button>
+  </div>
+  <table class="table table-hover table-bordered projectTeams-table">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -20,7 +24,7 @@
 
       <tr>
         <th scope="row">
-          <div class="input-ctn">
+          <div class="input-ctn input-main">
             <input type="checkbox" name="<%= student._id %>" class="th-input" />
             <div class="student-index">
               <%= student.firstName %>
@@ -81,5 +85,5 @@
       <% }) %>
     </tbody>
   </table>
-  <button type="submit" class="btn btn-info mt-5">Submit</button>
 </form>
+</main>
