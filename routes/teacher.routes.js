@@ -5,7 +5,6 @@ const Student = require("../models/Student.model");
 const Team = require("../models/Team.model");
 const randomTeams = require("../utils/randomTeams");
 const { createMatches, createTeams } = require("../utils/projectTeams");
-const { Error } = require("mongoose");
 
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
@@ -30,7 +29,9 @@ router.post("/random-teams", async (req, res) => {
   });
   let groupSize = req.body.typeNumber;
   let random = randomTeams(studentNames, groupSize);
-
+  const filter = { username: req.session.user.username };
+  const update = { randomTeams: random };
+  await Teacher.findOneAndUpdate(filter, update, {new: true});
   res.render("teacher-views/random-teams", { random });
 });
 
@@ -65,12 +66,14 @@ router.post("/project-teams", async (req, res, next) => {
         errorMessage = "You added the same student to multiple teams.";
       }
     });
-    console.log(errorMessage);
     if (!errorMessage) {
       await Team.deleteMany();
       finalTeams.forEach((team) => {
         Team.create({ owner: teacher._id, team: team });
       });
+      const filter = { username: req.session.user.username };
+      const update = { projectTeams: finalTeams };
+      await Teacher.findOneAndUpdate(filter, update, {new: true});
       res.redirect("/user/project-teams/teams");
     } else {
       res.render("teacher-views/projectTeams", {
