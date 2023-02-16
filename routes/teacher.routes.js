@@ -6,6 +6,8 @@ const Team = require("../models/Team.model");
 const randomTeams = require("../utils/randomTeams");
 const { createMatches, createTeams } = require("../utils/projectTeams");
 
+const downloadResource  = require('../utils/utilCsv');
+
 /* GET  profile page */
 router.get("/profile", async (req, res, next) => {
   const allStudents = await Student.find();
@@ -34,6 +36,23 @@ router.post("/random-teams", async (req, res) => {
   await Teacher.findOneAndUpdate(filter, update, {new: true});
   res.render("teacher-views/random-teams", { random });
 });
+
+router.get('/random-teams/download', async (req, res) => {
+  const fields = [
+    {
+      label: 'Random Teams',
+      value: 'team'
+    },
+  ];
+  const teacher =  await Teacher.findOne({username: req.session.user.username})
+  data = []
+  let randomTeams = teacher.randomTeams
+  randomTeams.forEach ((element) => {
+    data.push({team: element.map(team => team).join(',')})
+  })
+  downloadResource(res, "user.csv", fields, data)
+});
+
 
 /////////////////Project teams//////////////////
 // const teams = [];
@@ -98,6 +117,23 @@ router.get("/project-teams/teams", async (req, res) => {
   } catch (err) {
     console.log("There was an error in the get project teams route", err);
   }
+});
+
+router.get('/project-teams/teams/download', async (req, res) => {
+  const fields = [
+    {
+      label: 'Team',
+      value: 'team',
+    },
+  ];
+  const allTeams =  await Team.find().populate('team')
+
+  let data = []
+  allTeams.forEach((el) => {
+    let innerArr = el.team
+    data.push({team: innerArr.map(student => student.firstName).join(',')})
+  })
+  downloadResource(res, "user.csv", fields, data)
 });
 
 module.exports = router;
