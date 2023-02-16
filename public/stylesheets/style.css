@@ -1,15 +1,71 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;400;600;700;800;900&display=swap');
+
 body {
-  padding: 0 8rem;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  padding: 0;
+  /* font: 14px "Lucida Grande", Helvetica, Arial, sans-serif; */
+  font-family: font-family: 'Poppins', sans-serif;
+  ;
+}
+
+.index-ctn {
+  width: 100%;
+  height: 100vh;
+  margin: 0;
+  background-image: linear-gradient(rgba(0, 0, 0, 0.6), rgba(0, 0, 0, 0.6)), url("../images/louise-viallesoubranne-5EhN4wbfvBc-unsplash.jpg");
+  background-size: cover;
+  background-repeat: no-repeat;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.index-ctn h1 {
+  font-size: 8rem;
+  color: white;
+  font-weight: 600;
+}
+
+.authBtn {
+  width: 10rem;
+  margin: 0 1rem;
+}
+
+.form-ctn {
+  background-color: white;
+  width: 30%;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+  border-radius: 7px;
+  padding: 2rem 1rem;
+}
+
+.profile-ctn {
+  padding: 1rem 8rem;
+}
+
+.form-ctn .formCtn {
+  margin: 0;
+}
+
+.form-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.form-header button {
+  height: 4rem;
+  width: 10rem;
+}
+
+.projectTeams-table th {
+  text-align: center;
 }
 
 a {
   color: #00b7ff;
 }
 
-h1 {
-  color: 15px;
-}
 
 .allStudents {
   display: flex;
@@ -111,6 +167,10 @@ h1 {
   float: left;
   border: 2px solid #50bcf2;
   box-sizing: border-box;
+}
+
+.input-main {
+  border: 3px solid #0c638f;
 }
 
 .input-ctn input {

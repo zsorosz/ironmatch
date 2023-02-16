@@ -1,8 +1,8 @@
 <%- include('../partials/nav.ejs') %>  
-<div class="container text-center mt-5">
+<div class="container text-center mt-5 form-ctn">
   <h2>Add a new student</h2>
-  <div class="row form-container">
-    <div class="col-md-6">
+  <div class="row form-container formCtn">
+    <div>
       <form
         action="/student/new"
         method="POST"
@@ -44,7 +44,7 @@
             />
           </label>
         </div>
-        <button type="submit" class="btn btn-info">Create</button>
+        <button type="submit" class="btn btn-info mt-3">Create</button>
       </form>
     </div>
   </div>
