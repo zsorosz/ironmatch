@@ -3,7 +3,7 @@
 <h4 class="errorMessage"><%= errorMessage %></h4>
 <% } %>
 <form action="/user/project-teams" method="POST">
-  <table class="table table-success table-striped table-hover table-bordered">
+  <table class="table  table-hover table-bordered">
     <thead>
       <tr>
         <th scope="col"></th>
@@ -19,36 +19,62 @@
 
       <tr>
         <th scope="row">
-          <input type="checkbox" name="<%= student._id %>" class="th-input" />
-          <div class="student-index">
-            <!-- <img class="img-small" src="<%= student.imageUrl %>" alt="" /> -->
-            <%= student.firstName %>
+          <div class="input-ctn">
+            <input type="checkbox" name="<%= student._id %>" class="th-input" />
+            <div class="student-index">
+              <%= student.firstName %>
+            </div>
           </div>
         </th>
         <td>
           <% createMatches(student).perfect.forEach((match) => { %>
-          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
-          <%- match.firstName %> <% }) %>
+            <div class="input-ctn">
+              <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+              <div>
+                <%- match.firstName %>
+              </div>
+            </div>
+            <% }) %>
         </td>
         <td>
           <% createMatches(student).good.forEach((match) => { %>
-          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
-          <%- match.firstName %> <% }) %>
+            <div class="input-ctn">
+              <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+            <div>
+              <%- match.firstName %>
+            </div> 
+          </div>
+          <% }) %>
         </td>
         <td>
           <% createMatches(student).ok.forEach((match) => { %>
-          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
-          <%- match.firstName %> <% }) %>
+            <div class="input-ctn">
+              <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+              <div>
+                <%- match.firstName %> 
+              </div>
+            </div>
+          <% }) %>
         </td>
         <td>
           <% createMatches(student).bad.forEach((match) => { %>
-          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
-          <%- match.firstName %> <% }) %>
+            <div class="input-ctn">
+              <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+            <div>
+              <%- match.firstName %> 
+            </div>
+          </div>
+          <% }) %>
         </td>
         <td>
           <% createMatches(student).veryBad.forEach((match) => { %>
-          <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
-          <%- match.firstName %> <% }) %>
+            <div class="input-ctn">
+              <input type="checkbox" name="<%= student._id %>-<%= match._id %>" />
+            <div>
+              <%- match.firstName %> 
+            </div>
+          </div>
+          <% }) %>
         </td>
       </tr>
       <% }) %>
