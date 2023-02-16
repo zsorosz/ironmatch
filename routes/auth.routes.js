@@ -19,7 +19,7 @@ router.post("/signup", isLoggedOut, async (req, res, next) => {
   body.passwordHash = passwordHash;
 
   await Teacher.create(body);
-  res.redirect("/user/profile");
+  res.redirect("/auth/login");
 });
 
 /* GET login page */

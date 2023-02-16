@@ -1,19 +1,40 @@
-<%- include('../partials/nav.ejs') %>
-
-<form id="group-size" method="POST" action="/user/random-teams"> 
-    <input type="number" name="typeNumber" class="form-control" />
-    <label class="form-label" for="typeNumber">Group size</label>
-    <button type="submit" class="btn btn-info">Submit</button>
-</form>
-<% if (typeof random !== "undefined") { %>
-    <ul>
+<div class="container text-center mt-5">
+  <h2>Random teams</h2>
+  <div class="row form-container">
+    <div class="col-md-6">
+      <form
+        id="group-size"
+        method="POST"
+        action="/user/random-teams"
+        class="form mb-3"
+      >
+        <div class="form-group">
+          <label
+            >Group size
+            <input
+              type="number"
+              name="typeNumber"
+              class="form-control mt-3"
+              required
+            />
+          </label>
+        </div>
+        <button type="submit" class="btn btn-info">Submit</button>
+      </form>
+      <% if (typeof random !== "undefined") { %>
+      <ul class="list-group list-group-flush">
         <% random.forEach(team => { %>
-         <li><%= team %></li>
+        <li class="list-group-item pt-3 pb-3 fs-6"><%= team %></li>
         <% }) %>
-    </ul>
-    <button
-    type="button"
-    class="btn btn-info"
-    onclick="window.location.href='/user/random-teams/download'">Download CSV</button>
-<% } %>
-
+      </ul>
+      <button
+        type="button"
+        class="btn btn-info"
+        onclick="window.location.href='/user/random-teams/download'"
+      >
+        Download CSV
+      </button>
+      <% } %>
+    </div>
+  </div>
+</div>
