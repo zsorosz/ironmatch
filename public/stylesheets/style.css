@@ -198,3 +198,12 @@ input:checked~div {
   background-color: #50bcf2;
   color: white;
 }
+
+.modal-content {
+  width: 800px;
+}
+
+.list-group-flush {
+  width: 700px;
+  margin: 0 auto;
+}

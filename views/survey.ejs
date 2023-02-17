@@ -1,5 +1,5 @@
 <% if (typeof surveyComplete !== "undefined") { %>
- <h1 class="surveyComplete text-center">Thank you for completing the survey!</h1>
+ <h1 class="surveyComplete text-center mt-5 pt-5">Thank you for completing the survey!</h1>
 <% } else {%>
 
 <section class="container text-center myClass">
@@ -7,7 +7,7 @@
   <h1 class="mb-4 mt-5">Hello, <%= student.firstName %></h1>
   <h4>With who would you like to work on your next project? Select 5 students:</h4>
   <% } else { %>
-  <h4>Select <strong> 3 students</strong>, you would NOT like to work with</h4>
+  <h4 class="mb-4 mt-5">Select <strong> 3 students</strong>, you would NOT like to work with</h4>
   <% } %> <% if (typeof errorMessage !== "undefined") { %>
   <h4 class="errorMessage"><%= errorMessage %></h4>
   <% } %>
