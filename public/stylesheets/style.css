@@ -207,3 +207,38 @@ input:checked~div {
   width: 700px;
   margin: 0 auto;
 }
+
+@media only screen and (max-width: 425px)  {
+  .index-ctn h1 {
+    font-size: 2rem;
+  }
+  .index-ctn img {
+    width: 50vw;
+  }
+  .form-ctn {
+    width: 90vw;
+  }
+  .manageClass {
+    justify-content: space-evenly;
+    width: 100%;
+    flex-direction: column;
+  }
+  .myClass {
+    width: 100vw;
+  }
+  .profile-ctn {
+    padding: 0;
+  }
+  .random-list {
+    width: 100vw;
+  }
+  .form-container {
+    margin: 0;
+  }
+  .input-ctn div {
+    font-size: .8rem;
+  }
+  .input-main {
+    width: 60px;
+  }
+}

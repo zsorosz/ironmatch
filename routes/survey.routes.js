@@ -16,7 +16,6 @@ router.get("/:id", async (req, res, next) => {
     const allStudents = await Student.find({
       _id: { $not: { $eq: req.params.id } }, teacher: { $eq: teacher._id } }
     );
-    console.log(teacher._id)
     const page = 1;
     res.render("survey", {
       student,

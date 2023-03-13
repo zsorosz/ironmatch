@@ -1,4 +1,4 @@
-<%- include('../partials/nav.ejs') %>  
+<%- include('../partials/nav.ejs') %>
 <div class="container text-center mt-5">
   <h2>Random teams</h2>
   <div class="row form-container">
@@ -23,7 +23,7 @@
         <button type="submit" class="btn btn-info">Submit</button>
       </form>
       <% if (typeof random !== "undefined") { %>
-      <ul class="list-group list-group-flush">
+      <ul class="list-group list-group-flush random-list">
         <% random.forEach(team => { %>
         <li class="list-group-item pt-3 pb-3 fs-6"><%= team %></li>
         <% }) %>
