@@ -204,8 +204,16 @@ input:checked~div {
 }
 
 .list-group-flush {
-  width: 700px;
   margin: 0 auto;
+}
+
+@media only screen and (max-width: 1440px)  {
+  .index-ctn h1 {
+    font-size: 4rem;
+  }
+  .index-ctn img {
+    width: 20rem;
+  }
 }
 
 @media only screen and (max-width: 425px)  {
